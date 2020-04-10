@@ -1,0 +1,169 @@
+import java.util.Scanner;
+class TestStudent{
+public static void main(String[] args){
+Scanner input = new Scanner(System.in);
+String matricNo;
+double test1,test2;
+
+Student [] studDegree = new Student[3];
+for(int i=0;i<3;i++){
+
+System.out.print("Matric No :");
+matricNo = input.next();
+System.out.print("Test 1 :");
+test1 = input.nextDouble();
+System.out.print("Test 2 :");
+test2 = input.nextDouble();
+
+studDegree[i] = new Student(matricNo, test1, test2);
+}
+
+System.out.println("******************************************************");
+System.out.println("               STUDENT INFORMATION                    ");
+System.out.println("******************************************************");
+System.out.println("Matic No\t\tAverageMark\n");
+for(int k=0;k<3;k++){
+studDegree[k].calculateAverage();
+System.out.println(studDegree[k].getStudentInfo());
+}
+
+
+}
+}
+public class Student{
+	//list of data members
+private String matricNo;
+	private double test1, test2, averageMark;
+	
+	//constructor
+	public Student(String matric, double ts1, double ts2 ){
+		matricNo = matric;
+		test1 = ts1;
+		test2 = ts2;	 
+	}
+	//method that returns some of students’ info
+	public String getStudentInfo()
+{
+		return "\t"+matricNo+"\t\t"+averageMark;
+	}
+	//method that calculates the average of 2 tests
+public void calculateAverage()
+	{
+		averageMark = (test1 + test2)/2;
+	} 
+  }//end of class Student
+
+Task 2
+import java.util.Scanner;
+
+public class MaxcomApp {
+
+    public static void main(String[] args) {
+        int duration, category;
+        Scanner read = new Scanner(System.in);
+        double charge = 0.0;
+        int respond;
+        CallChargeCalculator ccc = new CallChargeCalculator();
+        do {
+            System.out.println("Enter the call duration (in minutes):");
+            duration = read.nextInt();
+            System.out.println("Enter Rate Category:  1.Daytime  2.Evening  3.Off-Peak");
+            category = read.nextInt();
+            charge = ccc.computeCharge(duration, category);
+            System.out.printf("The amount you have to pay is = RM%.2f %n", charge);
+            System.out.println("Do you want to continue? 1.Yes  2.No");
+            respond = read.nextInt();
+            System.out.println();
+        } while (respond != 2);
+        System.out.println("Thank you! See you again.");
+    }
+}
+
+Task 3
+import java.util.Scanner;
+public class Average{
+public static void main (String[] args){
+Scanner input = new Scanner(System.in);
+int a,b,c,d;
+
+System.out.println("Please enter 3 integers");
+System.out.println("Integer 1:");
+a = input.nextInt();
+System.out.println("Integer 2:");
+b = input.nextInt();
+System.out.println("Integer 3:");
+c = input.nextInt();
+System.out.println("The average for 3 integers is:"+ average(a,b,c));
+
+System.out.println("Enter another integer");
+d = input.nextInt();
+System.out.println("The average for 4 integers is:"+ average(a,b,c,d));
+}
+ 
+ 
+public static double average(int a,int b,int c){
+  double average = ((double)(a+b+c))/3;
+ return average;
+ }
+ 
+public static double average(int a,int b,int c,int d){
+   double average = ((double)(a+b+c+d))/4;
+  return average;
+  }
+}  
+
+Task 4
+import java.util.Scanner;
+
+public class TestBook {
+    public static void main (String [] args) {
+        Scanner input = new Scanner(System.in);
+        int n=0;
+        String title, mostExpensiveBook="";
+        double price,highestPrice=0;
+
+        System.out.print("Number of books: ");
+        n = input.nextInt();
+        Book [] myLibrary = new Book[n];
+
+        for (int i=0;i<n;i++){
+            input.nextLine();
+            System.out.print("Title: ");
+            title = input.nextLine();
+            System.out.print("Price: ");
+            price = input.nextDouble();
+
+            myLibrary[i] = new Book(title,price);
+
+            if (myLibrary[i].getPrice()>highestPrice){
+                highestPrice = myLibrary[i].getPrice();
+                mostExpensiveBook = myLibrary[i].getTitle();
+            }
+        }
+        System.out.printf("\"%s%s%.2f\n", mostExpensiveBook , "\" has the highest price with RM " , highestPrice);
+
+        System.out.println("Books that contain the term “Java” in their title:");
+        for(int j=0;j<n;j++){
+            if(myLibrary[j].getTitle().indexOf("Java")!=-1)
+                System.out.println(myLibrary[j].getTitle());
+        }
+
+    }
+}
+
+class Book {
+    private String title;      //book’s title
+    private double price;      //book’s price
+
+    public Book(String t, double p) {
+        title = t;
+        price = p;
+    }
+    public String getTitle() {
+        return title;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
